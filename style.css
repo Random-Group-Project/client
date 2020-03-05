@@ -1,3 +1,5 @@
-body {
-    background-color: blue;
+#intro {
+  height: 100vh;
+  background: url("https://www.vokeapp.com/wp-content/uploads/2019/07/back-view-dawn-daylight-2480530-e1564068284737.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
