@@ -36,6 +36,7 @@ function showLanding() {
   $("#landing-page-login").show();
   $("#landing-page-register").hide();
   $("#dashboard-page").hide();
+  $("#dashboard-past").hide();
 }
 
 function showDashboard() {
@@ -43,12 +44,17 @@ function showDashboard() {
   $("#dashboard-page").show();
   $("#landing-page-login").show();
   $("#landing-page-register").hide();
+  $("#dashboard-past").hide();
 }
 
 function logOut() {
   localStorage.clear();
   showLanding();
   signOut();
+}
+
+function fetchData() {
+  
 }
 
 $(document).ready(() => {
@@ -80,9 +86,6 @@ $(document).ready(() => {
     let email = $("#register-email").val();
     let username = $("#register-username").val();
     let password = $("#register-password").val();
-    console.log(email);
-    console.log(username);
-    console.log(password);
     $.ajax({
       method: "post",
       data: {
@@ -125,5 +128,9 @@ $(document).ready(() => {
         console.log(err);
       })
       .always(console.log("currently sending data..."));
+  });
+
+  $(".to-home").on("click", () => {
+    showDashboard();
   });
 });
