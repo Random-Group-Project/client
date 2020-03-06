@@ -43,12 +43,68 @@ function showDashboard() {
   $("#dashboard-page").show();
   $("#landing-page-login").show();
   $("#landing-page-register").hide();
+  $('#new-activity').hide()
+  // $('$dashboard-past').hide()
+
 }
 
 function logOut() {
   localStorage.clear();
   showLanding();
   signOut();
+}
+
+function createActivity() {
+  $('#generate-btn').on('click', e => {
+    e.preventDefault()
+    $.ajax({
+      url: 'http://localhost:3000/activities/create',
+      method: 'GET',
+      headers: { token: localStorage.getItem('token') }
+    })
+      .done(activity => {
+        console.log(activity)
+        let newActivity = activity.newActivity
+        let activityCard = `
+        <div class="col-6 mx-auto">
+          <div class="embed-responsive">
+            <iframe class="embed-responsive-item" src="${newActivity.gif_url}" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-6 mx-auto">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${newActivity.name}</h5>
+              <p class="card-text">Generated at: ${newActivity.createdAt}</p>
+            </div>
+          </div>
+        </div>
+        ` 
+        $('#new-activity').html(activityCard)
+        $('#new-activity').show()
+      })
+      .fail(err => {
+        console.log(err)
+      })
+      .always(() => {
+        console.log('fetching...')
+        // $('#new-activity').html('<h3>Loading...</h3>')
+      })
+  })
+}
+
+//show activities
+function activities () {
+  console.log('pressed')
+  $('#activities-btn').on('click', e => {
+    e.preventDefault()
+    // $('$dashboard-past').show()
+    $("#landing-page").hide();
+    $("#dashboard-page").hide();
+    $("#landing-page-login").hide();
+    $("#landing-page-register").hide();
+    $('#new-activity').hide()
+  })
 }
 
 $(document).ready(() => {
@@ -73,6 +129,8 @@ $(document).ready(() => {
     e.preventDefault();
     $("#landing-page-login").show();
     $("#landing-page-register").hide();
+    $('#login-email').val('')
+    $('#login-password').val('')
   });
 
   $("#landing-register").on("click", e => {
@@ -93,7 +151,10 @@ $(document).ready(() => {
       url: "http://localhost:3000/users/register"
     })
       .done(() => {
-        showDashboard();
+        showLanding()
+        $('#register-email').val('')
+        $('#register-username').val('')
+        $('#register-email').val('')
         console.log("Account creation successful, you may now login");
       })
       .fail(err => {
@@ -126,4 +187,7 @@ $(document).ready(() => {
       })
       .always(console.log("currently sending data..."));
   });
+
+  createActivity()
+  activities()
 });
