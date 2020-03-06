@@ -34,7 +34,7 @@
                     <div class="form-label-group">
                       <input
                         type="email"
-                        id="inputEmail"
+                        id="login-email"
                         class="form-control"
                         placeholder="Email address"
                         required
@@ -46,62 +46,30 @@
                     <div class="form-label-group">
                       <input
                         type="password"
-                        id="inputPassword"
+                        id="login-password"
                         class="form-control"
                         placeholder="Password"
                         required
                       />
                       <label for="inputPassword">Password</label>
                     </div>
-
-                    <div class="custom-control custom-checkbox mb-3">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        id="customCheck1"
-                      />
-                      <label class="custom-control-label" for="customCheck1"
-                        >Remember password</label
-                      >
-                    </div>
                     <button
                       class="btn btn-lg btn-primary btn-block text-uppercase"
                       type="submit"
+                      id="landing-login"
                     >
                       Sign in
                     </button>
                     <hr class="my-4" />
                     <div id="my-signin2"></div>
-                    <div>
-                      <a
-                        class="btn btn-danger"
-                        role="button"
-                        onclick="signOut()"
-                        >Sign Out</a
+                    <div class="container">
+                      <div
+                        class="row"
+                        style="display: flex; justify-content: center;"
                       >
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                      </div>
                     </div>
-                    <script>
-                      function onSuccess(googleUser) {
-                        console.log(
-                          "Logged in as: " +
-                            googleUser.getBasicProfile().getName()
-                        );
-                      }
-                      function onFailure(error) {
-                        console.log(error);
-                      }
-                      function renderButton() {
-                        gapi.signin2.render("my-signin2", {
-                          scope: "profile email",
-                          width: 240,
-                          height: 50,
-                          longtitle: true,
-                          theme: "dark",
-                          onsuccess: onSuccess,
-                          onfailure: onFailure
-                        });
-                      }
-                    </script>
                   </form>
                 </div>
               </div>
@@ -110,7 +78,10 @@
         </div>
       </div>
     </section>
-    <section id="dashboard-page"></section>
+    <section id="dashboard-page">
+      <h1>This is the dashboard page</h1>
+      <a class="btn btn-danger" role="button" id="landing-logout">Log Out</a>
+    </section>
     <!-- bootstrap-JS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -128,12 +99,14 @@
       crossorigin="anonymous"
     ></script>
     <!-- Google Log-in -->
-    <script
-      src="https://apis.google.com/js/platform.js?onload=renderButton"
-      async
-      defer
-    ></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <!-- index.js -->
     <script src="./index.js"></script>
   </body>
 </html>
