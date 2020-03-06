@@ -22,7 +22,7 @@
   </head>
   <body>
     <section id="landing-page">
-      <div id="loading-register">
+      <div id="landing-page-login">
         <div class="container">
           <div class="row" style="height: 200px;"></div>
           <div class="row">
@@ -58,7 +58,14 @@
                       type="submit"
                       id="landing-login"
                     >
-                      Sign in
+                      log in
+                    </button>
+                    <button
+                      class="btn btn-lg btn-success btn-block text-uppercase"
+                      type="submit"
+                      id="switch-register"
+                    >
+                      register a new account
                     </button>
                     <hr class="my-4" />
                     <div id="my-signin2"></div>
@@ -70,6 +77,68 @@
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                       </div>
                     </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="landing-page-register">
+        <div class="container">
+          <div class="row" style="height: 200px;"></div>
+          <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div class="card card-signin my-5">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Register a new Account</h5>
+                  <form class="form-signin">
+                    <div class="form-label-group">
+                      <input
+                        type="email"
+                        id="register-email"
+                        class="form-control"
+                        placeholder="Email address"
+                        required
+                        autofocus
+                      />
+                      <label for="register-email">Email address</label>
+                    </div>
+                    <div class="form-label-group">
+                      <input
+                        type="text"
+                        id="register-username"
+                        class="form-control"
+                        placeholder="Username"
+                        required
+                      />
+                      <label for="register-username">Username</label>
+                    </div>
+                    <div class="form-label-group">
+                      <input
+                        type="password"
+                        id="register-password"
+                        class="form-control"
+                        placeholder="Password"
+                        required
+                      />
+                      <label for="register-password">Password</label>
+                    </div>
+                    <button
+                      class="btn btn-lg btn-success btn-block text-uppercase"
+                      type="submit"
+                      id="landing-register"
+                    >
+                      Register
+                    </button>
+                    <hr class="my-4" />
+                    <button
+                      class="btn btn-lg btn-primary btn-block text-uppercase"
+                      type="submit"
+                      id="switch-login"
+                    >
+                      back to login
+                    </button>
                   </form>
                 </div>
               </div>

@@ -33,12 +33,16 @@ function signOut() {
 
 function showLanding() {
   $("#landing-page").show();
+  $("#landing-page-login").show();
+  $("#landing-page-register").hide();
   $("#dashboard-page").hide();
 }
 
 function showDashboard() {
   $("#landing-page").hide();
   $("#dashboard-page").show();
+  $("#landing-page-login").show();
+  $("#landing-page-register").hide();
 }
 
 function logOut() {
@@ -59,12 +63,51 @@ $(document).ready(() => {
   }
   $("#landing-logout").on("click", logOut);
 
+  $("#switch-register").on("click", e => {
+    e.preventDefault();
+    $("#landing-page-login").hide();
+    $("#landing-page-register").show();
+  });
+
+  $("#switch-login").on("click", e => {
+    e.preventDefault();
+    $("#landing-page-login").show();
+    $("#landing-page-register").hide();
+  });
+
+  $("#landing-register").on("click", e => {
+    e.preventDefault();
+    let email = $("#register-email").val();
+    let username = $("#register-username").val();
+    let password = $("#register-password").val();
+    console.log(email);
+    console.log(username);
+    console.log(password);
+    $.ajax({
+      method: "post",
+      data: {
+        email,
+        username,
+        password
+      },
+      url: "http://localhost:3000/users/register"
+    })
+      .done(() => {
+        showDashboard();
+        console.log("Account creation successful, you may now login");
+      })
+      .fail(err => {
+        console.log(err);
+      })
+      .always(() => console.log("currently sending data"));
+  });
+
   $("#landing-login").on("click", e => {
     e.preventDefault();
     let email = $("#login-email").val();
     let password = $("#login-password").val();
     $.ajax({
-      method: "POST",
+      method: "post",
       url: "http://localhost:3000/users/login",
       data: {
         email,
@@ -79,7 +122,8 @@ $(document).ready(() => {
         showDashboard();
       })
       .fail(err => {
-        console.log(err)})
+        console.log(err);
+      })
       .always(console.log("currently sending data..."));
   });
 });
