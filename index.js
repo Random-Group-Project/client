@@ -17,6 +17,7 @@ function onSignIn(googleUser) {
     .done(response => {
       console.log("Succesfully returned data");
       localStorage.setItem("token", response.token);
+      localStorage.setItem("username", response.username);
       showDashboard();
     })
     .fail(err => console.log(err))
@@ -72,10 +73,13 @@ $(document).ready(() => {
     })
       .done(response => {
         let token = response.token;
+        let username = response.username;
         localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
         showDashboard();
       })
-      .fail(err => console.log(err))
+      .fail(err => {
+        console.log(err)})
       .always(console.log("currently sending data..."));
   });
 });
