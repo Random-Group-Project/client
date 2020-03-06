@@ -6,18 +6,21 @@ function onSignIn(googleUser) {
   // console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
   let id_token = googleUser.getAuthResponse().id_token;
   console.log("User successfully logged in.");
-  localStorage.setItem("token", id_token);
   // sent to server
   $.ajax({
     method: "GET",
     url: "http://localhost:3000/users/googlesign",
     headers: {
-      token: localStorage.getItem("token")
+      token: id_token
     }
   })
-  .done(response => console.log(response))
-  .fail(err => console.log(err))
-  .always(console.log(`Currently sending data...`))
+    .done(response => {
+      console.log("Succesfully returned data");
+      localStorage.setItem("token", response.token);
+      showDashboard();
+    })
+    .fail(err => console.log(err))
+    .always(alw => console.log(`Currently sending data...`));
 }
 
 function signOut() {
@@ -27,4 +30,52 @@ function signOut() {
   });
 }
 
-$("#btn-signout").on("click", signOut);
+function showLanding() {
+  $("#landing-page").show();
+  $("#dashboard-page").hide();
+}
+
+function showDashboard() {
+  $("#landing-page").hide();
+  $("#dashboard-page").show();
+}
+
+function logOut() {
+  localStorage.clear();
+  showLanding();
+  signOut();
+}
+
+$(document).ready(() => {
+  console.log("ready");
+
+  let token = localStorage.getItem("token");
+
+  if (token) {
+    showDashboard();
+  } else {
+    showLanding();
+  }
+  $("#landing-logout").on("click", logOut);
+
+  $("#landing-login").on("click", e => {
+    e.preventDefault();
+    let email = $("#login-email").val();
+    let password = $("#login-password").val();
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:3000/users/login",
+      data: {
+        email,
+        password
+      }
+    })
+      .done(response => {
+        let token = response.token;
+        localStorage.setItem("token", token);
+        showDashboard();
+      })
+      .fail(err => console.log(err))
+      .always(console.log("currently sending data..."));
+  });
+});

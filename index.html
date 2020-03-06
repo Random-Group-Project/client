@@ -34,7 +34,7 @@
                     <div class="form-label-group">
                       <input
                         type="email"
-                        id="inputEmail"
+                        id="login-email"
                         class="form-control"
                         placeholder="Email address"
                         required
@@ -46,49 +46,28 @@
                     <div class="form-label-group">
                       <input
                         type="password"
-                        id="inputPassword"
+                        id="login-password"
                         class="form-control"
                         placeholder="Password"
                         required
                       />
                       <label for="inputPassword">Password</label>
                     </div>
-
-                    <div class="custom-control custom-checkbox mb-3">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        id="customCheck1"
-                      />
-                      <label class="custom-control-label" for="customCheck1"
-                        >Remember password</label
-                      >
-                    </div>
                     <button
                       class="btn btn-lg btn-primary btn-block text-uppercase"
                       type="submit"
+                      id="landing-login"
                     >
                       Sign in
                     </button>
                     <hr class="my-4" />
                     <div id="my-signin2"></div>
                     <div class="container">
-                      <div class="row">
-                        <div class="col my-auto">
-                          <div
-                            class="g-signin2"
-                            data-onsuccess="onSignIn"
-                          ></div>
-                        </div>
-                        <div class="col">
-                          <a
-                            class="btn btn-danger"
-                            role="button"
-                            onclick="signOut()"
-                            style="width: 200px;"
-                            >Sign Out</a
-                          >
-                        </div>
+                      <div
+                        class="row"
+                        style="display: flex; justify-content: center;"
+                      >
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
                       </div>
                     </div>
                   </form>
@@ -99,7 +78,10 @@
         </div>
       </div>
     </section>
-    <section id="dashboard-page"></section>
+    <section id="dashboard-page">
+      <h1>This is the dashboard page</h1>
+      <a class="btn btn-danger" role="button" id="landing-logout">Log Out</a>
+    </section>
     <!-- bootstrap-JS -->
     <script
       src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
